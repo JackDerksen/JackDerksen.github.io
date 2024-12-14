@@ -103,16 +103,12 @@ const currentPath = Astro.url.pathname;
 
   /* Narrow Window Adjustments */
   @media (max-width: 768px) {
-    /* Keep the backdrop as is - translucent and blurred */
     .nav-content {
       right: 0;
       width: 100%;
       align-items: center;
       border-bottom: 3px solid var(--contrast-color);
-      border-top: 3px solid var(--contrast-color);
-      /* Make just the content strip opaque */
       background-color: var(--bg-primary);
-      /* Optional: add a subtle transition for the background color */
       transition: background-color var(--transition-normal);
     }
     .nav-item {

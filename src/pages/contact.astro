@@ -61,4 +61,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     background-color: var(--bg-secondary);
     transform: translateX(var(--space-xs));
   }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      max-width: 400px;
+      padding: 0 var(--space-md);
+    }
+    .contact-link {
+      justify-content: center;
+    }
+  }
 </style>
