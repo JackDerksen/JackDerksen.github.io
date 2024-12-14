@@ -1,17 +1,14 @@
 ---
-import '../styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
-import Navigation from '../components/Navigation.astro';
+import "../styles/global.css";
+import { ViewTransitions } from "astro:transitions";
+import Navigation from "../components/Navigation.astro";
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { 
-  title, 
-  description = "Your default meta description"
-} = Astro.props;
+const { title, description = "Your default meta description" } = Astro.props;
 ---
 
 <html lang="en">
@@ -22,70 +19,73 @@ const {
     <title>{title}</title>
     <ViewTransitions />
     <script>
-    // Theme initialization and management
-    const initializeTheme = () => {
-      const theme = (() => {
-        if (typeof localStorage !== 'undefined') {
-          const storedTheme = localStorage.getItem('theme');
-          if (storedTheme) {
-            return storedTheme;
+      // Theme initialization and management
+      const initializeTheme = () => {
+        const theme = (() => {
+          if (typeof localStorage !== "undefined") {
+            const storedTheme = localStorage.getItem("theme");
+            if (storedTheme) {
+              return storedTheme;
+            }
           }
+          return "dark";
+        })();
+
+        if (theme === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+        } else {
+          document.documentElement.removeAttribute("data-theme");
         }
-        return 'dark'; // Default to dark theme
-      })();
 
-      if (theme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-      }
-
-      localStorage.setItem('theme', theme);
-    };
+        localStorage.setItem("theme", theme);
+      };
 
       // Run on initial page load
       initializeTheme();
 
       // Re-run on view transitions
-      document.addEventListener('astro:after-swap', initializeTheme);
+      document.addEventListener("astro:after-swap", initializeTheme);
     </script>
   </head>
   <body>
     <header class="header">
       <div class="header-content">
-        <a href="/" class="logo">Jack Derksen</a>
+        <a href="/" class="logo">
+          <span class="logo-full">Jack Derksen</span>
+          <span class="logo-short">Jack</span>
+        </a>
         <div class="controls">
-          <button 
-            class="theme-toggle" 
-            id="themeToggle" 
+          <button
+            class="theme-toggle"
+            id="themeToggle"
             aria-label="Toggle theme"
           >
             <span class="visually-hidden">Toggle theme</span>
-            <svg 
-              class="theme-icon" 
-              width="24" 
-              height="24" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
+            <svg
+              class="theme-icon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <circle cx="12" cy="12" r="5"/>
-              <line x1="12" y1="1" x2="12" y2="3"/>
-              <line x1="12" y1="21" x2="12" y2="23"/>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-              <line x1="1" y1="12" x2="3" y2="12"/>
-              <line x1="21" y1="12" x2="23" y2="12"/>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
             </svg>
           </button>
-          <button 
-            class="menu-toggle" 
-            id="menuToggle" 
+          <button
+            class="menu-toggle"
+            id="menuToggle"
             aria-label="Toggle menu"
             aria-expanded="false"
           >
@@ -117,69 +117,71 @@ const {
       // Initialize all interactive elements
       const initializeInteractiveElements = () => {
         // Theme toggle handler
-        const themeToggle = document.getElementById('themeToggle');
+        const themeToggle = document.getElementById("themeToggle");
         const handleThemeToggle = () => {
           const element = document.documentElement;
-          const currentTheme = element.hasAttribute('data-theme') ? 'light' : 'dark';
-          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+          const currentTheme = element.hasAttribute("data-theme")
+            ? "light"
+            : "dark";
+          const newTheme = currentTheme === "light" ? "dark" : "light";
 
-          if (newTheme === 'light') {
-            element.setAttribute('data-theme', 'light');
+          if (newTheme === "light") {
+            element.setAttribute("data-theme", "light");
           } else {
-            element.removeAttribute('data-theme');
+            element.removeAttribute("data-theme");
           }
 
-          localStorage.setItem('theme', newTheme);
+          localStorage.setItem("theme", newTheme);
         };
-        // Remove old event listener if it exists
-        themeToggle?.removeEventListener('click', handleThemeToggle);
-        // Add new event listener
-        themeToggle?.addEventListener('click', handleThemeToggle);
+
+        themeToggle?.removeEventListener("click", handleThemeToggle);
+        themeToggle?.addEventListener("click", handleThemeToggle);
 
         // Menu handlers
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
+        const menuToggle = document.getElementById("menuToggle");
+        const navMenu = document.getElementById("navMenu");
 
         const handleMenuToggle = () => {
-          const isExpanded = navMenu?.classList.toggle('active') ?? false;
-          menuToggle?.setAttribute('aria-expanded', isExpanded.toString());
-          navMenu?.setAttribute('aria-hidden', (!isExpanded).toString());
+          const isExpanded = navMenu?.classList.toggle("active") ?? false;
+          menuToggle?.setAttribute("aria-expanded", isExpanded.toString());
+          navMenu?.setAttribute("aria-hidden", (!isExpanded).toString());
         };
 
         const handleClickOutside = (e: MouseEvent) => {
           if (e.target instanceof HTMLElement) {
-            if (!e.target.closest('#navMenu') && !e.target.closest('#menuToggle')) {
-              navMenu?.classList.remove('active');
-              menuToggle?.setAttribute('aria-expanded', 'false');
-              navMenu?.setAttribute('aria-hidden', 'true');
+            if (
+              !e.target.closest("#navMenu") &&
+              !e.target.closest("#menuToggle")
+            ) {
+              navMenu?.classList.remove("active");
+              menuToggle?.setAttribute("aria-expanded", "false");
+              navMenu?.setAttribute("aria-hidden", "true");
             }
           }
         };
 
         const handleEscape = (e: KeyboardEvent) => {
-          if (e.key === 'Escape') {
-            navMenu?.classList.remove('active');
-            menuToggle?.setAttribute('aria-expanded', 'false');
-            navMenu?.setAttribute('aria-hidden', 'true');
+          if (e.key === "Escape") {
+            navMenu?.classList.remove("active");
+            menuToggle?.setAttribute("aria-expanded", "false");
+            navMenu?.setAttribute("aria-hidden", "true");
           }
         };
 
-        // Remove old event listeners if they exist
-        menuToggle?.removeEventListener('click', handleMenuToggle);
-        document.removeEventListener('click', handleClickOutside);
-        document.removeEventListener('keydown', handleEscape);
+        menuToggle?.removeEventListener("click", handleMenuToggle);
+        document.removeEventListener("click", handleClickOutside);
+        document.removeEventListener("keydown", handleEscape);
 
-        // Add new event listeners
-        menuToggle?.addEventListener('click', handleMenuToggle);
-        document.addEventListener('click', handleClickOutside);
-        document.addEventListener('keydown', handleEscape);
+        menuToggle?.addEventListener("click", handleMenuToggle);
+        document.addEventListener("click", handleClickOutside);
+        document.addEventListener("keydown", handleEscape);
       };
 
-      // Run on initial page load
       initializeInteractiveElements();
-
-      // Re-run on view transitions
-      document.addEventListener('astro:after-swap', initializeInteractiveElements);
+      document.addEventListener(
+        "astro:after-swap",
+        initializeInteractiveElements,
+      );
     </script>
   </body>
 </html>
@@ -193,14 +195,23 @@ const {
     padding: 0 var(--space-xl);
     width: 100%;
     max-width: none;
+    transition: all var(--transition-normal);
   }
 
   .logo {
-    font-size: clamp(var(--font-size-md), 2vw, var(--font-size-lg));
+    text-decoration: none;
+    transition: color var(--transition-normal);
+  }
+
+  .logo-full,
+  .logo-short {
+    font-size: var(--font-size-2xl);
     font-weight: bold;
     color: var(--contrast-color);
-    text-decoration: none;
-    transition: color var(--transition-fast);
+  }
+
+  .logo-short {
+    display: none;
   }
 
   .logo:hover {
@@ -217,7 +228,7 @@ const {
   .menu-toggle {
     padding: var(--space-xs);
     color: var(--contrast-color);
-    transition: color var(--transition-fast);
+    transition: color var(--transition-normal);
   }
 
   .theme-toggle:hover,
@@ -256,8 +267,9 @@ const {
     width: 100%;
     height: 2px;
     background-color: currentColor;
-    transition: transform var(--transition-normal),
-                opacity var(--transition-normal);
+    transition:
+      transform var(--transition-normal),
+      opacity var(--transition-normal);
   }
 
   .menu-line:nth-child(1) {
@@ -284,6 +296,23 @@ const {
     transform: translateY(calc(-0.5rem + 1px)) rotate(-45deg);
   }
 
+  @media (max-width: 768px) {
+    .header-content {
+      padding: 0 var(--space-md);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo-full {
+      display: none;
+    }
+
+    .logo-short {
+      display: block;
+      font-size: var(--font-size-xl);
+    }
+  }
+
   .visually-hidden {
     position: absolute;
     width: 1px;
@@ -294,11 +323,5 @@ const {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
-  }
-
-  @media (max-width: 768px) {
-    .header-content {
-      padding: 0 var(--space-md);
-    }
   }
 </style>

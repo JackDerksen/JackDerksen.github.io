@@ -1,26 +1,26 @@
 ---
 const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/pinboard', label: 'Pinboard' },
-  { href: '/contact', label: 'Contact' },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Projects" },
+  { href: "/pinboard", label: "Pinboard" },
+  { href: "/contact", label: "Contact" },
 ];
 ---
+
 <nav class="nav-menu" id="navMenu" aria-hidden="true">
   <div class="nav-backdrop"></div>
   <div class="nav-content">
-    {navItems.map((item) => (
-      <a 
-        href={item.href}
-        class="nav-item"
-        data-astro-prefetch
-      >
-        {item.label}
-      </a>
-    ))}
+    {
+      navItems.map((item) => (
+        <a href={item.href} class="nav-item" data-astro-prefetch>
+          {item.label}
+        </a>
+      ))
+    }
   </div>
 </nav>
+
 <style>
   .nav-menu {
     position: fixed;
@@ -30,6 +30,7 @@ const navItems = [
     height: calc(100vh - var(--header-height));
     pointer-events: none;
     z-index: var(--z-nav);
+    visibility: hidden;
   }
 
   .nav-backdrop {
@@ -66,6 +67,7 @@ const navItems = [
   /* Active State */
   .nav-menu.active {
     pointer-events: auto;
+    visibility: visible;
   }
 
   .nav-menu.active .nav-backdrop {
@@ -82,7 +84,6 @@ const navItems = [
       right: 0;
       width: 100%;
       align-items: center;
-      background-color: var(--bg-primary);
       border-bottom: 3px solid var(--contrast-color);
     }
 
