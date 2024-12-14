@@ -16,6 +16,7 @@
   --contrast-secondary: color-mix(in srgb, var(--white) 70%, var(--charcoal));
   --accent-primary: var(--lavender);
   --accent-hover: color-mix(in srgb, var(--lavender) 50%, var(--purple));
+  --accent-subtle: color-mix(in srgb, var(--charcoal) 90%, var(--white));
   --button-bg: color-mix(in srgb, var(--contrast-color) 10%, transparent);
 
   /* Spacing */
@@ -72,6 +73,7 @@
   --contrast-secondary: color-mix(in srgb, var(--charcoal) 70%, var(--white));
   --accent-primary: var(--purple);
   --accent-hover: color-mix(in srgb, var(--purple) 50%, var(--lavender));
+  --accent-subtle: color-mix(in srgb, var(--white) 90%, var(--charcoal));
   --button-bg: color-mix(in srgb, var(--contrast-color) 10%, transparent);
 }
 
@@ -202,6 +204,25 @@ p {
   border-radius: var(--radius-sm);
   z-index: -1;
   transition: background-color var(--transition-normal);
+}
+
+@media (max-width: 768px) {
+  .card {
+    border: none;
+    border-left: 3px solid var(--accent-subtle);
+    border-radius: 0;
+    padding: var(--space-md) var(--space-sm) var(--space-md) var(--space-md);
+    margin: 0;
+  }
+
+  .card::after {
+    display: none;
+  }
+
+  .card:not(:last-child) {
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-md);
+  }
 }
 
 /* Apply card styles to specific components */
