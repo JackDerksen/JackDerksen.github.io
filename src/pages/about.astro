@@ -42,4 +42,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     gap: var(--space-lg);
     margin-top: var(--space-lg);
   }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      display: flex;
+      flex-direction: column;
+      padding: 0 var(--space-md);
+    }
+  }
 </style>
