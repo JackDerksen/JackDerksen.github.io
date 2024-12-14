@@ -321,7 +321,7 @@ button:hover {
   .projects-grid,
   .about-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: var(--space-xl);
   }
 }
 
@@ -345,7 +345,10 @@ button:hover {
 
   .projects-container,
   .posts-container {
-    padding: 0 var(--space-xs);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    padding: 0 4rem;
   }
 
   .project-content,
