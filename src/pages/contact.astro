@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact | Jack Derksen" description="Get in touch with me">
+  <h1>Contact</h1>
+  <div class="contact-grid">
+    <div class="card contact-info">
+      <h2>Get in Touch</h2>
+      <p>Feel free to reach out through any of these channels:</p>
+      <ul class="contact-links">
+        <li>
+          <a href="mailto:jmderksen9@gmail.com" class="contact-link">
+            <span>Email</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/JackDerksen" class="contact-link">
+            <span>GitHub</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://linkedin.com/in/jack-derksen-6292a1261" class="contact-link">
+            <span>LinkedIn</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    max-width: 800px;
+    margin: var(--space-lg) auto 0;
+  }
+
+  .contact-links {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-md);
+  }
+
+  .contact-links li {
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    padding: var(--space-sm);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-normal);
+  }
+
+  .contact-link:hover {
+    background-color: var(--shadow-color);
+    transform: translateX(var(--space-xs));
+  }
+</style>
