@@ -6,6 +6,8 @@ const navItems = [
   { href: "/pinboard", label: "Pinboard" },
   { href: "/contact", label: "Contact" },
 ];
+
+const currentPath = Astro.url.pathname;
 ---
 
 <nav class="nav-menu" id="navMenu" aria-hidden="true">
@@ -13,7 +15,19 @@ const navItems = [
   <div class="nav-content">
     {
       navItems.map((item) => (
-        <a href={item.href} class="nav-item" data-astro-prefetch>
+        <a
+          href={item.href}
+          class:list={[
+            "nav-item",
+            {
+              active:
+                currentPath === item.href ||
+                (item.href !== "/" && currentPath.startsWith(item.href)),
+            },
+          ]}
+          data-astro-prefetch
+          aria-current={currentPath === item.href ? "page" : undefined}
+        >
           {item.label}
         </a>
       ))
@@ -60,8 +74,17 @@ const navItems = [
     opacity: 0;
   }
 
+  .nav-item.active {
+    color: var(--accent-primary);
+    font-weight: 500;
+  }
+
   .nav-item:hover {
     color: var(--accent-primary);
+  }
+
+  .nav-item.active:hover {
+    color: var(--accent-hover);
   }
 
   /* Active State */
@@ -78,15 +101,20 @@ const navItems = [
     opacity: 1;
   }
 
-  /* Mobile Adjustments */
+  /* Narrow Window Adjustments */
   @media (max-width: 768px) {
+    /* Keep the backdrop as is - translucent and blurred */
     .nav-content {
       right: 0;
       width: 100%;
       align-items: center;
       border-bottom: 3px solid var(--contrast-color);
+      border-top: 3px solid var(--contrast-color);
+      /* Make just the content strip opaque */
+      background-color: var(--bg-primary);
+      /* Optional: add a subtle transition for the background color */
+      transition: background-color var(--transition-normal);
     }
-
     .nav-item {
       width: 100%;
       text-align: center;
