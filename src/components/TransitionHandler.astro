@@ -9,6 +9,10 @@
         if (storedTheme) {
           return storedTheme;
         }
+        // Check system preference
+        if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+          return "light";
+        }
       }
       return "dark";
     })();
@@ -21,6 +25,17 @@
 
     localStorage.setItem("theme", theme);
   };
+
+  // Handle keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      document.body.classList.add('using-keyboard');
+    }
+  });
+
+  document.addEventListener('mousedown', () => {
+    document.body.classList.remove('using-keyboard');
+  });
 
   // Run on initial page load
   initializeTheme();

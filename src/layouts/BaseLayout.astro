@@ -16,6 +16,8 @@ const { title, description = "Your default meta description" } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#202124" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <TransitionHandler />
     <script>
@@ -48,6 +50,9 @@ const { title, description = "Your default meta description" } = Astro.props;
     </script>
   </head>
   <body>
+    <a href="#main-content" class="sr-only focus:not-sr-only">
+      Skip to main content
+    </a>
     <header class="header">
       <div class="header-content">
         <a href="/" class="logo">
