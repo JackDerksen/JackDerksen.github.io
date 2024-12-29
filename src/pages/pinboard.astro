@@ -1,8 +1,30 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const posts = [
+
+interface BasePost {
+  id: string;
+  title: string;
+  date: string;
+  content: string;
+  tags: string[];
+}
+
+interface PinnedPost extends BasePost {
+  isPinned: true;
+  type: 'learning' | 'project';
+}
+
+interface RegularPost extends BasePost {
+  isPinned?: false;
+}
+
+type Post = PinnedPost | RegularPost;
+
+const pinnedPosts: PinnedPost[] = [
   {
-    title: "Currently Learning: Rust and Web Dev",
+    id: "learning",
+    isPinned: true,
+    title: "Rust and Web Dev",
     date: "3-1-2024",
     content:
       "I've decided to try learning Rust, as it has quickly become an incredibly " +
@@ -11,9 +33,12 @@ const posts = [
       "really appeal to me. I'm also trying to learn basic web development, using " +
       "tools like Astro to build the site you're currently on!",
     tags: ["Learning", "Rust", "Web Dev", "Astro"],
+    type: "learning"
   },
   {
-    title: "Current Project: Minui, a terminal UI library from scratch",
+    id: "project",
+    isPinned: true,
+    title: "Minui, a terminal UI library from scratch",
     date: "11-1-2024",
     content:
       "This project started as me wanting to make a terminal-based clone of " +
@@ -22,8 +47,15 @@ const posts = [
       "because I thought it would be easy). I'm doing this project primarily " +
       "in Rust so it doubles as a learning exercise.",
     tags: ["Project", "Minui", "Rust"],
+    type: "project"
   },
 ];
+
+const regularPosts: RegularPost[] = [
+  // Regular post contents: id, title, date, content, tags
+];
+
+const allPosts: Post[] = [...pinnedPosts, ...regularPosts];
 ---
 
 <BaseLayout
@@ -33,8 +65,21 @@ const posts = [
   <h1>Pinboard</h1>
   <div class="posts-container">
     {
-      posts.map((post) => (
-        <article class="card post-card">
+      allPosts.map((post) => (
+        <article class:list={[
+          "card",
+          "post-card",
+          { "pinned-post": post.isPinned },
+          { [`post-type-${('type' in post) ? post.type : ''}`]: 'type' in post }
+        ]}>
+          {post.isPinned && (
+            <div class="pin-indicator">
+              <span class="pin-label">
+                <span class="pin-emoji">📌</span>
+                {('type' in post && post.type === "learning") ? "Currently Learning" : "Current Project"}
+              </span>
+            </div>
+          )}
           <div class="post-content">
             <div class="post-header">
               <h2>{post.title}</h2>
@@ -70,6 +115,40 @@ const posts = [
 
   .post-card {
     width: 100%;
+    position: relative;
+    transition: all var(--theme-transition-duration) ease;
+  }
+
+  /* Styles for pinned posts */
+  .pinned-post {
+    position: relative;
+    border-width: 3px;
+  }
+
+  .post-type-learning {
+    border-color: var(--accent-primary);
+  }
+
+  .post-type-project {
+    border-color: var(--accent-primary);
+  }
+
+  .pin-indicator {
+    position: absolute;
+    top: -14px;
+    left: var(--space-sm);
+    background-color: var(--bg-primary);
+    padding: 0 var(--space-sm);
+    transition: all var(--theme-transition-duration) ease;
+  }
+
+  .pin-label {
+    font-size: var(--font-size-sm);
+    color: var(--accent-primary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
   }
 
   .post-content {
@@ -107,6 +186,21 @@ const posts = [
     .posts-container {
       padding: 0 var(--space-md);
       padding-bottom: var(--space-xl);
+    }
+
+    .pin-indicator {
+      top: -5px;
+      right: auto;
+      left: var(--space-sm);
+      padding-left: 0;
+    }
+
+    .pin-emoji {
+      display: none;
+    }
+
+    .pinned-post .post-header {
+      margin-top: var(--space-xs);
     }
   }
 </style>
