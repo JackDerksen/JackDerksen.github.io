@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Mail, Github, Linkedin } from "lucide-astro";
 ---
 
 <BaseLayout title="Contact | Jack Derksen" description="Get in touch with me">
@@ -11,11 +12,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <ul class="contact-links">
         <li>
           <a href="mailto:jmderksen9@gmail.com" class="contact-link">
+            <Mail size={25} />
             <span>Email</span>
           </a>
         </li>
         <li>
           <a href="https://github.com/JackDerksen" class="contact-link">
+            <Github size={25} />
             <span>GitHub</span>
           </a>
         </li>
@@ -24,6 +27,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             href="https://linkedin.com/in/jack-derksen-6292a1261"
             class="contact-link"
           >
+            <Linkedin size={25} />
             <span>LinkedIn</span>
           </a>
         </li>
@@ -36,16 +40,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .contact-grid {
     max-width: 500px;
     margin: var(--space-lg) auto 0;
-  }
-
-  .contact-info {
-    width: 100%;
-    position: relative;
-    transition: all var(--theme-transition-duration) ease;
-  }
-
-  .contact-info h2 {
-    margin-bottom: var(--space-md);
   }
 
   .contact-links {
@@ -61,25 +55,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .contact-link {
     display: flex;
     align-items: center;
+    gap: var(--space-md);
     padding: var(--space-sm);
+    padding-left: var(--space-md);
     border: 2px solid var(--contrast-color);
     border-radius: var(--radius-sm);
+    color: var(--contrast-color);
     transition: all var(--theme-transition-duration) ease;
   }
 
   .contact-link:hover {
     background-color: var(--bg-secondary);
     transform: translateX(var(--space-xs));
+    color: var(--accent-primary);
   }
 
   @media (max-width: 768px) {
     .contact-grid {
       padding: 0 var(--space-md);
-      padding-bottom: var(--space-xl);
     }
 
     .contact-link {
-      justify-content: center;
+      padding: var(--space-md);
     }
   }
 </style>
