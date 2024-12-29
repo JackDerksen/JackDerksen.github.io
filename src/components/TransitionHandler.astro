@@ -1,0 +1,30 @@
+---
+---
+<script>
+  // Theme initialization and management
+  const initializeTheme = () => {
+    const theme = (() => {
+      if (typeof localStorage !== "undefined") {
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme) {
+          return storedTheme;
+        }
+      }
+      return "dark";
+    })();
+
+    if (theme === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+
+    localStorage.setItem("theme", theme);
+  };
+
+  // Run on initial page load
+  initializeTheme();
+
+  // Handle page transitions
+  document.addEventListener("astro:after-swap", initializeTheme);
+</script>

@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { ViewTransitions } from "astro:transitions";
+import TransitionHandler from "../components/TransitionHandler.astro";
 import Navigation from "../components/Navigation.astro";
 
 interface Props {
@@ -17,7 +17,7 @@ const { title, description = "Your default meta description" } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <ViewTransitions />
+    <TransitionHandler />
     <script>
       // Theme initialization and management
       const initializeTheme = () => {
