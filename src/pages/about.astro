@@ -39,8 +39,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .about-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-    gap: var(--space-lg);
+    gap: var(--space-xl);
     margin-top: var(--space-lg);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-section {
+    width: 100%;
+    position: relative;
+    transition: all var(--theme-transition-duration) ease;
+  }
+
+  .about-section h2 {
+    margin-bottom: var(--space-md);
   }
 
   @media (max-width: 768px) {
