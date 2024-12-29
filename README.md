@@ -6,4 +6,8 @@ This is a work in progress, but the site should be fully functional on all devic
 
 
 ### TODO:
-- Add a blog page for expanded versions of pinboard posts, link to those from pins
+- Add a blog page for expanded versions of pinboard posts, link to those from posts.
+
+
+### Current bugs:
+- Card-based page titles switch theme colours at a MUCH slower rate on mobile devices.
