@@ -21,6 +21,18 @@ type Project = PinnedProject | RegularProject;
 
 const projects: Project[] = [
   {
+    title: "This Website!",
+    description:
+      "The website you're admiring right now is my first real foray into web development. " +
+      "I kind of had no idea what I was doing when I started on this site, but it's been a " +
+      "really good learning experience so far. Still lots to improve and lots to learn, " +
+      "but I'm very happy with how it's coming along so far! Hopefully you like it too :) " +
+      "Powered by Astro and GitHub Pages.",
+    github: "https://github.com/JackDerksen/JackDerksen.github.io",
+    tags: ["Web Dev", "Astro", "GH Pages"],
+    isPinned: true,
+  },
+  {
     title: "Viis Dev Kit",
     description:
       "Not really a project, but rather a record of the tools that I use for development. " +
@@ -36,7 +48,6 @@ const projects: Project[] = [
       "and De Xie at MacEwan University.",
     github: "https://github.com/JackDerksen/CMPT-361-Project",
     tags: ["MacEwan", "Networking", "SMTP", "Python"],
-    isPinned: true,
   },
   {
     title: "CMPT 229 Movie Rental Application",
@@ -66,7 +77,13 @@ const sortedProjects = [...projects].sort((a, b) => {
   <div class="projects-container">
     {
       sortedProjects.map((project) => (
-        <article class:list={["card", "project-card", { "pinned-project": project.isPinned }]}>
+        <article
+          class:list={[
+            "card",
+            "project-card",
+            { "pinned-project": project.isPinned },
+          ]}
+        >
           {project.isPinned && (
             <div class="pin-indicator">
               <span class="pin-label">
@@ -114,7 +131,6 @@ const sortedProjects = [...projects].sort((a, b) => {
     transition: all var(--theme-transition-duration) ease;
   }
 
-  /* Styles for pinned projects */
   .pinned-project {
     border-width: 3px;
     border-color: var(--accent-primary);
@@ -142,7 +158,7 @@ const sortedProjects = [...projects].sort((a, b) => {
     display: flex;
     flex-direction: column;
     height: 100%;
-    gap: var(--space-md);
+    gap: var(--space-xs);
   }
 
   .project-header {
@@ -156,7 +172,7 @@ const sortedProjects = [...projects].sort((a, b) => {
   .project-footer {
     margin-top: auto;
     border-top: 2px solid var(--contrast-color);
-    padding-top: var(--space-md);
+    padding-top: var(--space-lg);
   }
 
   .project-tags {
@@ -188,7 +204,7 @@ const sortedProjects = [...projects].sort((a, b) => {
     }
 
     .pinned-project .project-header {
-      margin-top: var(--space-xs);
+      margin-top: var(--space-sm);
     }
   }
 </style>

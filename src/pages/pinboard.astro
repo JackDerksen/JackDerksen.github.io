@@ -11,7 +11,7 @@ interface BasePost {
 
 interface PinnedPost extends BasePost {
   isPinned: true;
-  type: 'learning' | 'project';
+  type: "learning" | "project";
 }
 
 interface RegularPost extends BasePost {
@@ -33,7 +33,7 @@ const pinnedPosts: PinnedPost[] = [
       "really appeal to me. I'm also trying to learn basic web development, using " +
       "tools like Astro to build the site you're currently on!",
     tags: ["Learning", "Rust", "Web Dev", "Astro"],
-    type: "learning"
+    type: "learning",
   },
   {
     id: "project",
@@ -47,7 +47,7 @@ const pinnedPosts: PinnedPost[] = [
       "because I thought it would be easy). I'm doing this project primarily " +
       "in Rust so it doubles as a learning exercise.",
     tags: ["Project", "Minui", "Rust"],
-    type: "project"
+    type: "project",
   },
 ];
 
@@ -63,20 +63,28 @@ const allPosts: Post[] = [...pinnedPosts, ...regularPosts];
   description="Check out what I'm currently working on"
 >
   <h1>Pinboard</h1>
+
   <div class="posts-container">
     {
       allPosts.map((post) => (
-        <article class:list={[
-          "card",
-          "post-card",
-          { "pinned-post": post.isPinned },
-          { [`post-type-${('type' in post) ? post.type : ''}`]: 'type' in post }
-        ]}>
+        <article
+          class:list={[
+            "card",
+            "post-card",
+            { "pinned-post": post.isPinned },
+            {
+              [`post-type-${"type" in post ? post.type : ""}`]: "type" in post,
+            },
+          ]}
+          data-tags={post.tags.join(",")}
+        >
           {post.isPinned && (
             <div class="pin-indicator">
               <span class="pin-label">
                 <span class="pin-emoji">📌</span>
-                {('type' in post && post.type === "learning") ? "Currently Learning" : "Current Project"}
+                {"type" in post && post.type === "learning"
+                  ? "Currently Learning"
+                  : "Current Project"}
               </span>
             </div>
           )}
@@ -119,7 +127,6 @@ const allPosts: Post[] = [...pinnedPosts, ...regularPosts];
     transition: all var(--theme-transition-duration) ease;
   }
 
-  /* Styles for pinned posts */
   .pinned-post {
     position: relative;
     border-width: 3px;
@@ -173,7 +180,7 @@ const allPosts: Post[] = [...pinnedPosts, ...regularPosts];
   .post-footer {
     margin-top: auto;
     border-top: 2px solid var(--contrast-color);
-    padding-top: var(--space-md);
+    padding-top: var(--space-lg);
   }
 
   .post-tags {
@@ -200,7 +207,7 @@ const allPosts: Post[] = [...pinnedPosts, ...regularPosts];
     }
 
     .pinned-post .post-header {
-      margin-top: var(--space-xs);
+      margin-top: var(--space-sm);
     }
   }
 </style>

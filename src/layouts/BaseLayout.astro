@@ -8,7 +8,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Your default meta description" } = Astro.props;
+const { title, description = "Meta description here" } = Astro.props;
 ---
 
 <html lang="en">
@@ -114,7 +114,10 @@ const { title, description = "Your default meta description" } = Astro.props;
 
     <footer class="footer">
       <div class="container">
-        <p>© {new Date().getFullYear()} Jack Derksen. Powered by Astro.</p>
+        <p>
+          © {new Date().getFullYear()} Jack Derksen. Powered by Astro and GitHub
+          Pages.
+        </p>
       </div>
     </footer>
 
