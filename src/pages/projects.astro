@@ -21,15 +21,28 @@ type Project = PinnedProject | RegularProject;
 
 const projects: Project[] = [
   {
+    title: "MinUI",
+    description:
+      "MinUI was born from a desire to create terminal-based games in Rust, " +
+      "specifically a terminal Tetris clone in my case. While several terminal " +
+      "UI libraries  exist for Rust, none quite offered the perfect balance of " +
+      "simplicity, performance, and game-focused features that I was looking " +
+      "for. MinUI aims to fill this gap by providing a fast, easy-to-use " +
+      "library that makes terminal game and UI development a joy.",
+    github: "https://github.com/JackDerksen/minui",
+    tags: ["Work in Progress", "Rust"],
+    isPinned: true,
+  },
+  {
     title: "This Website!",
     description:
       "The website you're admiring right now is my first real foray into web development. " +
       "I kind of had no idea what I was doing when I started on this site, but it's been a " +
       "really good learning experience so far. Still lots to improve and lots to learn, " +
       "but I'm very happy with how it's coming along so far! Hopefully you like it too :) " +
-      "Powered by Astro and GitHub Pages.",
+      "Powered by Astro.",
     github: "https://github.com/JackDerksen/JackDerksen.github.io",
-    tags: ["Web Dev", "Astro", "GH Pages"],
+    tags: ["Web Dev", "Astro"],
     isPinned: true,
   },
   {
